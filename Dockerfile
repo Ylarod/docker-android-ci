@@ -54,10 +54,10 @@ RUN git clone https://github.com/jenv/jenv.git $JENV_ROOT && \
     echo 'eval "$(jenv init -)"' >> ~/.bashrc
 
 ## Install Android SDK
-ARG sdk_version=commandlinetools-linux-7302050_latest.zip \
-    android_api=android-30 \
-    android_build_tools=30.0.3 \
-    cmake=3.10.2.4988404
+ARG sdk_version=commandlinetools-linux-7302050_latest.zip
+ARG android_api=android-30
+ARG android_build_tools=30.0.3
+ARG cmake=3.10.2.4988404
 
 RUN mkdir -p ${ANDROID_HOME} && \
     wget --quiet --output-document=/tmp/${sdk_version} https://dl.google.com/android/repository/${sdk_version} && \

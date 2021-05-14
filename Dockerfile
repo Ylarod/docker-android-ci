@@ -77,8 +77,8 @@ ENV PATH=${ANDROID_HOME}/emulator:${ANDROID_HOME}/tools:${ANDROID_HOME}/tools/bi
 
 RUN mkdir ~/.android && echo '### User Sources for Android SDK Manager' > ~/.android/repositories.cfg
 
-RUN yes | sdkmanager --sdk_root=$ANDROID_HOME --licenses
-RUN sdkmanager --sdk_root=$ANDROID_HOME --install \
+RUN yes | /opt/sdk/tools/bin/sdkmanager --sdk_root=$ANDROID_HOME --licenses
+RUN /opt/sdk/tools/bin/sdkmanager --sdk_root=$ANDROID_HOME --install \
   "platform-tools" \
   "build-tools;${android_build_tools}" \
   "platforms;${android_api}"

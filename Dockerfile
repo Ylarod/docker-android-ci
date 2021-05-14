@@ -61,8 +61,8 @@ RUN echo 'eval "$(jenv init -)"' >> ~/.bashrc
 
 ## Install Android SDK
 ARG sdk_version=commandlinetools-linux-7302050_latest.zip
-ARG android_api=android-29
-ARG android_build_tools=29.0.3
+ARG android_api=android-30
+ARG android_build_tools=30.0.3
 ARG cmake=3.10.2.4988404
 RUN mkdir -p ${ANDROID_HOME} && \
     wget --quiet --output-document=/tmp/${sdk_version} https://dl.google.com/android/repository/${sdk_version} && \
@@ -84,4 +84,5 @@ RUN sdkmanager --sdk_root=$ANDROID_HOME --install \
 RUN mkdir -p ${ANDROID_NDK_HOME} && \
     wget --quiet --output-document=/tmp/21.4.7075529.tar.gz https://github.com/Ylarod/goron/releases/download/v1.0/21.4.7075529.tar.gz && \
     tar -xzvf /tmp/21.4.7075529.tar.gz -C /opt/sdk/ndk && \
+    chmod -R 777 /opt/sdk/ndk/21.4.7075529 && \
     rm /tmp/21.4.7075529.tar.gz

@@ -16,10 +16,9 @@ ENV LANG=en_US.UTF-8 \
     ANDROID_NDK=/opt/sdk/ndk \
     ANDROID_NDK_HOME=/opt/sdk/ndk \
     GRADLE_USER_HOME=/opt/cache/gradle \
-    JENV_ROOT "$HOME/.jenv" \
-    JDK_ROOT "/usr/lib/jvm/" \
-    PATH "$PATH:$JENV_ROOT/bin" \
-    PATH=${ANDROID_HOME}/emulator:${ANDROID_HOME}/tools:${ANDROID_HOME}/tools/bin:${ANDROID_HOME}/platform-tools:${ANDROID_HOME}/cmdline-tools:${PATH}
+    JENV_ROOT=$HOME/.jenv \
+    JDK_ROOT=/usr/lib/jvm/ \
+    PATH=${ANDROID_HOME}/emulator:${ANDROID_HOME}/tools:${ANDROID_HOME}/tools/bin:${ANDROID_HOME}/platform-tools:${ANDROID_HOME}/cmdline-tools:$JENV_ROOT/bin:${PATH}
 
 # Required for Jenv
 SHELL ["/bin/bash", "-c"]

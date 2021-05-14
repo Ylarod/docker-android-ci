@@ -1,0 +1,11 @@
+name: 'docker-android-ci'
+description: 'GitHub Actions for Android build with llvm based obfuscator'
+author: 'Ylarod'
+
+branding:
+  color: green
+  icon: package
+
+runs:
+  using: 'docker'
+  image: 'docker://ylarod/docker-android-ci'

@@ -13,8 +13,8 @@ LABEL "maintainer"="Ylarod"
 
 ENV ANDROID_HOME=/opt/sdk \
     ANDROID_SDK=/opt/sdk \
-    ANDROID_NDK=/opt/ndk \
-    ANDROID_NDK_HOME=/opt/ndk \
+    ANDROID_NDK=/opt/sdk/ndk \
+    ANDROID_NDK_HOME=/opt/sdk/ndk \
     GRADLE_USER_HOME=/opt/cache/gradle
 
 # Required for Jenv
@@ -73,7 +73,7 @@ RUN mkdir -p ${android_home} && \
 
 # Set environmental variables
 ENV ANDROID_HOME ${android_home}
-ENV PATH=${ANDROID_HOME}/emulator:${ANDROID_HOME}/tools:${ANDROID_HOME}/tools/bin:${ANDROID_HOME}/platform-tools:${PATH}
+ENV PATH=${ANDROID_HOME}/emulator:${ANDROID_HOME}/tools:${ANDROID_HOME}/tools/bin:${ANDROID_HOME}/platform-tools:${ANDROID_HOME}/cmdline-tools:${PATH}
 RUN mkdir ~/.android && echo '### User Sources for Android SDK Manager' > ~/.android/repositories.cfg
 RUN yes | sdkmanager --sdk_root=$ANDROID_HOME --licenses
 RUN sdkmanager --sdk_root=$ANDROID_HOME --install \
@@ -84,6 +84,5 @@ RUN sdkmanager --sdk_root=$ANDROID_HOME --install \
 
 # Install ndk 21.4.7075529-goron
 RUN wget --quiet --output-document=/tmp/21.4.7075529.tar.gz https://github.com/Ylarod/goron/releases/download/v1.0/21.4.7075529.tar.gz && \
-    tar -xzvf /tmp/21.4.7075529.tar.gz -C /opt/ && \
-    mv /opt/21.4.7075529 /opt/ndk && \
+    tar -xzvf /tmp/21.4.7075529.tar.gz -C /opt/sdk/ndk && \
     rm /tmp/21.4.7075529.tar.gz

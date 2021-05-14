@@ -74,9 +74,8 @@ RUN mkdir -p ${android_home} && \
 # Set environmental variables
 ENV ANDROID_HOME ${android_home}
 ENV PATH=${ANDROID_HOME}/emulator:${ANDROID_HOME}/tools:${ANDROID_HOME}/tools/bin:${ANDROID_HOME}/platform-tools:${PATH}
-
 RUN mkdir ~/.android && echo '### User Sources for Android SDK Manager' > ~/.android/repositories.cfg
-
+RUN env
 RUN yes | /opt/sdk/tools/bin/sdkmanager --sdk_root=$ANDROID_HOME --licenses
 RUN /opt/sdk/tools/bin/sdkmanager --sdk_root=$ANDROID_HOME --install \
   "platform-tools" \

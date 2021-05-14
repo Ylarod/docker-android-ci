@@ -61,18 +61,16 @@ RUN echo 'eval "$(jenv init -)"' >> ~/.bashrc
 
 ## Install Android SDK
 ARG sdk_version=commandlinetools-linux-7302050_latest.zip
-ARG android_home=/opt/sdk
 ARG android_api=android-29
 ARG android_build_tools=29.0.3
 ARG cmake=3.10.2.4988404
-RUN mkdir -p ${android_home} && \
+RUN mkdir -p ${ANDROID_HOME} && \
     wget --quiet --output-document=/tmp/${sdk_version} https://dl.google.com/android/repository/${sdk_version} && \
-    unzip -q /tmp/${sdk_version} -d ${android_home} && \
-    mv ${android_home}/cmdline-tools ${android_home}/tools && \
+    unzip -q /tmp/${sdk_version} -d ${ANDROID_HOME} && \
+    mv ${ANDROID_HOME}/cmdline-tools ${ANDROID_HOME}/tools && \
     rm /tmp/${sdk_version}
 
 # Set environmental variables
-ENV ANDROID_HOME ${android_home}
 ENV PATH=${ANDROID_HOME}/emulator:${ANDROID_HOME}/tools:${ANDROID_HOME}/tools/bin:${ANDROID_HOME}/platform-tools:${ANDROID_HOME}/cmdline-tools:${PATH}
 RUN mkdir ~/.android && echo '### User Sources for Android SDK Manager' > ~/.android/repositories.cfg
 RUN yes | sdkmanager --sdk_root=$ANDROID_HOME --licenses
@@ -83,6 +81,7 @@ RUN sdkmanager --sdk_root=$ANDROID_HOME --install \
   "cmake;${cmake}"
 
 # Install ndk 21.4.7075529-goron
-RUN wget --quiet --output-document=/tmp/21.4.7075529.tar.gz https://github.com/Ylarod/goron/releases/download/v1.0/21.4.7075529.tar.gz && \
+RUN mkdir -p ${ANDROID_NDK_HOME} && \
+    wget --quiet --output-document=/tmp/21.4.7075529.tar.gz https://github.com/Ylarod/goron/releases/download/v1.0/21.4.7075529.tar.gz && \
     tar -xzvf /tmp/21.4.7075529.tar.gz -C /opt/sdk/ndk && \
     rm /tmp/21.4.7075529.tar.gz

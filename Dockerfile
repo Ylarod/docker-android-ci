@@ -83,6 +83,7 @@ RUN /opt/sdk/tools/bin/sdkmanager --sdk_root=$ANDROID_HOME --install \
   "cmake;${cmake}"
 
 # Install ndk 21.4.7075529-goron
-RUN wget https://github.com/Ylarod/goron/releases/download/v1.0/21.4.7075529.tar.gz
-RUN tar -xzvf https://github.com/Ylarod/goron/releases/download/v1.0/21.4.7075529.tar.gz -C /opt/
-RUN mv /opt/21.4.7075529 /opt/ndk
+RUN wget --quiet --output-document=/tmp/21.4.7075529.tar.gz https://github.com/Ylarod/goron/releases/download/v1.0/21.4.7075529.tar.gz && \
+    tar -xzvf /tmp/21.4.7075529.tar.gz -C /opt/ && \
+    mv /opt/21.4.7075529 /opt/ndk && \
+    rm /tmp/21.4.7075529.tar.gz
